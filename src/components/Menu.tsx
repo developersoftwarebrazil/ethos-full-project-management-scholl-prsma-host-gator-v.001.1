@@ -31,6 +31,12 @@ const menuItems = [
         visible: ["admin", "teacher"],
       },
       {
+        icon: "/course.png",
+        label: "Série",
+        href: "/list/grades",
+        visible: ["admin", "teacher"],
+      },
+      {
         icon: "/subject.png",
         label: "Discíplinas",
         href: "/list/subjects",
@@ -38,7 +44,7 @@ const menuItems = [
       },
       {
         icon: "/class.png",
-        label: "Classes",
+        label: "Turmas",
         href: "/list/classes",
         visible: ["admin", "teacher"],
       },

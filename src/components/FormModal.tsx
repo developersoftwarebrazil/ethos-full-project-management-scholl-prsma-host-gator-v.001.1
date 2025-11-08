@@ -3,6 +3,7 @@
 import {
   deleteClass,
   deleteExam,
+  deleteGrade,
   deleteStudent,
   deleteSubject,
   deleteTeacher,
@@ -21,7 +22,7 @@ const deleteActionMap = {
   teacher: deleteTeacher,
   student: deleteStudent,
   exam: deleteExam,
-// TODO: OTHER DELETE ACTIONS
+  // TODO: OTHER DELETE ACTIONS
   parent: deleteSubject,
   lesson: deleteSubject,
   assignment: deleteSubject,
@@ -29,6 +30,7 @@ const deleteActionMap = {
   attendance: deleteSubject,
   event: deleteSubject,
   announcement: deleteSubject,
+  grade: deleteGrade,
 };
 
 // USE LAZY LOADING
@@ -55,6 +57,10 @@ const ExamForm = dynamic(() => import("./forms/ExamForm"), {
 const LessonForm = dynamic(() => import("./forms/LessonForm"), {
   loading: () => <h1>Loading...</h1>,
 });
+const GradeForm = dynamic(() => import("./forms/GradeForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+
 const forms: {
   [key: string]: (
     setOpen: Dispatch<SetStateAction<boolean>>,
@@ -103,14 +109,22 @@ const forms: {
       relatedData={relatedData}
     />
   ),
-    // TODO OTHER LIST ITEMS
+  // TODO OTHER LIST ITEMS
   lesson: (setOpen, type, data, relatedData) => (
-      <LessonForm
-        type={type}
-        data={data}
-        setOpen={setOpen}
-        relatedData={relatedData}
-      />
+    <LessonForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  grade: (setOpen, type, data, relatedData) => (
+    <GradeForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
   ),
 };
 
@@ -151,13 +165,13 @@ const FormModal = ({
       <form action={formAction} className="p-4 flex flex-col gap-4">
         <input type="text | number" name="id" value={id} hidden />
         <span className="text-center font-medium">
-          Todos os dados serão perdidos. Você tem certeza que deseja deletar este {table}?
+          Todos os dados serão perdidos. Você tem certeza que deseja deletar
+          este {table}?
         </span>
         <button className="bg-red-700 text-white py-2 px-4 rounded-md border-none w-max self-center">
           Deletar
         </button>
       </form>
-      
     ) : type === "create" || type === "update" ? (
       forms[table](setOpen, type, data, relatedData)
     ) : (

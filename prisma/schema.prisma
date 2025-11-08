@@ -70,6 +70,7 @@ model Parent {
 model Grade {
   id    Int @id @default(autoincrement())
   level Int @unique
+  description String
 
   students Student[]
   classess Class[]

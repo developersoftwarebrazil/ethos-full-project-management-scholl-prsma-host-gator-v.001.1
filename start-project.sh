@@ -32,7 +32,7 @@ if [ "$ENVIRONMENT" == "dev" ]; then
   ENV_FILE=".env.local"
 else
   export DOCKERFILE="Dockerfile.prod"
-  ENV_FILE=".env"
+  ENV_FILE=".env.prod"
 fi
 
 # Pergunta sobre volumes

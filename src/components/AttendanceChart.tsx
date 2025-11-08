@@ -15,7 +15,7 @@ import {
 const AttendanceChart = ({
   data,
 }: {
-  data: { name: string; present: number; absent: number }[];
+  data: { name: string; presente: number; ausente: number }[];
 }) => {
   return (
     <ResponsiveContainer width="100%" height="90%">
@@ -37,13 +37,13 @@ const AttendanceChart = ({
           wrapperStyle={{ paddingTop: "20px", paddingBottom: "40px" }}
         />
         <Bar
-          dataKey="present"
+          dataKey="presente"
           fill="#FAE27C"
           legendType="circle"
           radius={[10, 10, 0, 0]}
         />
         <Bar
-          dataKey="absent"
+          dataKey="ausente"
           fill="#C3EBFA"
           legendType="circle"
           radius={[10, 10, 0, 0]}
