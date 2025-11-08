@@ -1,0 +1,23 @@
+# Dockerfile.dev
+FROM node:18
+
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Copia apenas os arquivos de dependências primeiro (para otimizar o cache)
+COPY package*.json ./
+
+# Instala dependências
+RUN npm install
+
+# Copia o restante do código, incluindo a pasta prisma
+COPY . .
+
+# 🔧 GARANTE que a pasta prisma e o schema sejam visíveis
+COPY prisma ./prisma
+
+# Expõe a porta
+EXPOSE 3000
+
+# Executa a migração do Prisma antes de iniciar o servidor
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run dev"]
